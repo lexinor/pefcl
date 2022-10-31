@@ -7,7 +7,7 @@ import { Transaction } from 'sequelize/types';
 @singleton()
 export class InvoiceDB {
   async getAllInvoices(): Promise<InvoiceModel[]> {
-    return await InvoiceModel.findAll();
+    return await InvoiceModel.findAll({ order: [['status', 'DESC'], ['createdAt', 'DESC']]});
   }
 
   async getAllReceivingInvoices(

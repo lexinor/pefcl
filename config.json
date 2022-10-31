@@ -5,8 +5,8 @@
     "identifierType": "license"
   },
   "frameworkIntegration": {
-    "enabled": false,
-    "resource": "your-resource",
+    "enabled": true,
+    "resource": "pefcl-esx",
     "syncInitialBankBalance": true
   },
   "database": {
@@ -31,7 +31,7 @@
   },
   "bankBlips": {
     "enabled": true,
-    "name": "Bank",
+    "name": "Banque",
     "colour": 2,
     "icon": 108,
     "scale": 0.55,
@@ -188,8 +188,8 @@
     "mockLicenses": false
   },
   "atmBlips": {
-    "enabled": false,
-    "name": "ATM",
+    "enabled": true,
+    "name": "DAB",
     "colour": 39,
     "icon": 108,
     "scale": 0.35,

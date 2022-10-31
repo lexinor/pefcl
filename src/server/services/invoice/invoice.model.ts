@@ -1,4 +1,4 @@
-import { DATABASE_PREFIX, MS_TWO_WEEKS } from '@utils/constants';
+import { DATABASE_PREFIX, MS_ONE_WEEK, MS_TWO_WEEKS } from '@utils/constants';
 import { DataTypes, Model, Optional } from 'sequelize';
 import { singleton } from 'tsyringe';
 import { Invoice, InvoiceStatus } from '../../../../typings/Invoice';
@@ -71,7 +71,7 @@ InvoiceModel.init(
       get() {
         return new Date(this.getDataValue('expiresAt') ?? '').getTime();
       },
-      defaultValue: () => new Date(Date.now() + MS_TWO_WEEKS).toString(),
+      defaultValue: () => new Date(Date.now() + MS_ONE_WEEK).toString(),
     },
     ...timestamps,
   },

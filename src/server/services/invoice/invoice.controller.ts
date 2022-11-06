@@ -40,6 +40,19 @@ export class InvoiceController {
     });
   }
 
+  @Export(ServerExports.GetInvoicesByReceiver)
+  @NetPromise(InvoiceEvents.Get)
+  async getInvoicesByReceiver(req: Request<GetInvoicesInput>, res: Response<GetInvoicesResponse>, receiverName: string) {
+    const data = await this._InvoiceService.getAllInvoicesByReceiver(req, receiverName);
+    return res({
+      status: 'ok',
+      data: {
+        ...req.data,
+        ...data,
+      },
+    });
+  }
+
   @Export(ServerExports.GetUnpaidInvoices)
   @NetPromise(InvoiceEvents.CountUnpaid)
   async countUnpaid(req: Request<number>, res: Response<number>) {

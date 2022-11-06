@@ -1,7 +1,7 @@
 import { singleton } from 'tsyringe';
 import { CreateInvoiceInput, GetInvoicesInput, InvoiceStatus } from '@typings/Invoice';
 import { InvoiceModel } from './invoice.model';
-import { MS_TWO_WEEKS } from '@utils/constants';
+import { MS_ONE_WEEK, MS_TWO_WEEKS } from '@utils/constants';
 import { Transaction } from 'sequelize/types';
 
 @singleton()
@@ -10,11 +10,15 @@ export class InvoiceDB {
     return await InvoiceModel.findAll({ order: [['status', 'DESC'], ['createdAt', 'DESC']]});
   }
 
+  async getAllInvoicesByReceiver(receiverName: string): Promise<InvoiceModel[]> {
+    return await InvoiceModel.findAll({ order: [["status", "DESC"], ["createdAt", "DESC"]], where: { receiverAccountIdentifier: receiverName }, });
+  }
+
   async getAllReceivingInvoices(
     identifier: string,
     pagination: GetInvoicesInput,
   ): Promise<InvoiceModel[]> {
-    return await InvoiceModel.findAll({ where: { toIdentifier: identifier }, ...pagination });
+    return await InvoiceModel.findAll({ order: [["status", "DESC"], ["createdAt", "DESC"]], where: { toIdentifier: identifier }, ...pagination });
   }
 
   async getReceivedInvoicesCount(identifier: string): Promise<number> {
@@ -34,7 +38,7 @@ export class InvoiceDB {
   async createInvoice(input: CreateInvoiceInput): Promise<InvoiceModel> {
     const expiresAt = input.expiresAt
       ? input.expiresAt
-      : new Date(Date.now() + MS_TWO_WEEKS).toString();
+      : new Date(Date.now() + MS_ONE_WEEK).toString();
 
     return await InvoiceModel.create({ ...input, expiresAt });
   }

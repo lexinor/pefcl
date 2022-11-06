@@ -25,6 +25,7 @@ export enum ServerExports {
 
   PayInvoice = 'payInvoice',
   GetInvoices = 'getInvoices',
+  GetInvoicesByReceiver = 'getInvoicesByReceiver',
   CreateInvoice = 'createInvoice',
   GetUnpaidInvoices = 'getUnpaidInvoices',
 

@@ -69,6 +69,15 @@ export class InvoiceService {
     };
   }
 
+  async getAllInvoicesByReceiver(req: Request<GetInvoicesInput>, receiverName: string) {
+    logger.silly('Fetching receiver invoices ..');
+    const invoices = await this._invoiceDB.getAllInvoicesByReceiver(receiverName);
+
+    return {
+      invoices: invoices.map((invoice) => invoice.toJSON()),
+    };
+  }
+
   async createInvoice(data: CreateInvoiceInput) {
     logger.silly('Creating invoice ..');
     logger.silly(data);

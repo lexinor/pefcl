@@ -61,7 +61,7 @@ jobs:
           title: Pre-Release Build (${{ steps.get_vars.outputs.SHORT_SHA }})
           prerelease: true
           automatic_release_tag: unstable-${{ steps.get_vars.outputs.BRANCH_NAME }}
-          files: ./temp/pefcl.zip
+          files: ./temp/pefcl-pre-${{ steps.get_vars.outputs.SHORT_SHA }}.zip
 
         env:
           CI: false

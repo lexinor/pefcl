@@ -10,10 +10,6 @@ export class InvoiceDB {
     return await InvoiceModel.findAll({ order: [['status', 'DESC'], ['createdAt', 'DESC']]});
   }
 
-  async getAllInvoicesByReceiver(receiverName: string): Promise<InvoiceModel[]> {
-    return await InvoiceModel.findAll({ order: [["status", "DESC"], ["createdAt", "DESC"]], where: { receiverAccountIdentifier: receiverName }, });
-  }
-
   async getAllReceivingInvoices(
     identifier: string,
     pagination: GetInvoicesInput,
